@@ -1,26 +1,92 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import styled, {createGlobalStyle} from 'styled-components'
+import ContainerProdutos from './components/ContainerProdutos'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const GlobalStyle = createGlobalStyle`
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+`
+
+const ProdutosMain = styled.main`
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+`
+
+class App extends React.Component {
+  state = {
+    produtos: [
+      {
+        id: 1,
+        nome: "item A",
+        valor: 10.0,
+        caminhoDaImagem: "https://picsum.photos/200/200",
+      },
+
+      {
+        id: 2,
+        nome: "item B",
+        valor: 20.0,
+        caminhoDaImagem: "https://picsum.photos/200/201",
+      },
+
+      {
+        id: 3,
+        nome: "item C",
+        valor: 30.0,
+        caminhoDaImagem: "https://picsum.photos/201/202",
+      },
+
+      {
+        id: 4,
+        nome: "item D",
+        valor: 40.0,
+        caminhoDaImagem: "https://picsum.photos/201/203",
+      },
+
+      {
+        id: 5,
+        nome: "item E",
+        valor: 50.0,
+        caminhoDaImagem: "https://picsum.photos/201/200",
+      },
+
+      {
+        id: 6,
+        nome: "item F",
+        valor: 60.0,
+        caminhoDaImagem: "https://picsum.photos/202/200",
+      },
+
+      {
+        id: 7,
+        nome: "item G",
+        valor: 70.0,
+        caminhoDaImagem: "https://picsum.photos/203/200",
+      },
+
+      {
+        id: 8,
+        nome: "item H",
+        valor: 80.0,
+        caminhoDaImagem: "https://picsum.photos/201/201",
+      }
+    ]
+  }
+
+  render() {
+    const {produtos} = this.state
+    return (
+      <ProdutosMain>
+        <ContainerProdutos renderizarContainer={produtos} />
+      </ProdutosMain>
+    )
+
+  }
+
 }
 
-export default App;
+export default App
