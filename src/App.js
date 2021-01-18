@@ -1,24 +1,19 @@
 import React from 'react';
-import logo from './logo.svg';
+import {Filtros} from './Components/Filtros/Filtros'
+import {Carrinhos} from './Components/Carrinhos/Carrinhos'
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Filtros
+
+      //A LÓGICA AINDA PRECISA SER VISTA, PROVAVELMENTE SERÃO FUNÇÃO CHAMADAS À PARTIR DE ONCHANGE
+      />
+      <Carrinhos
+      />
+
+   
     </div>
   );
 }
