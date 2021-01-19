@@ -9,9 +9,9 @@ const MainStyle = styled.main`
     height: 100vh;
     justify-content: center;
     width: 300px;
-
-    @media (max-width:700px) {
-        display: none;
+    
+    @media (max-width: 600px) {
+        width: 160px;
     }
 `
 
@@ -28,9 +28,18 @@ const Filtro = styled.section`
     margin-left: 40px;
     position: fixed;
     width: 200px;
+
+    @media (max-width: 600px) {
+        width: 120px;
+        margin-left: 0;
+    }
 `
 const InputStyle = styled.input`
     width: 150px;
+
+    @media (max-width: 600px) {
+        width: 96px;
+    }
 `
 
 
