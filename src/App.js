@@ -1,15 +1,8 @@
 import React from "react";
-import styled, { createGlobalStyle } from "styled-components";
+import styled from "styled-components";
+import GlobalStyle from "./globalStyles";
 import { Filtros } from "./Components/Filtros/Filtros";
 import ContainerProdutos from "./Components/Produto/ContainerProdutos";
-
-const GlobalStyle = createGlobalStyle`
-  * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
-`;
 
 const ProdutosMain = styled.main`
   display: flex;
@@ -82,10 +75,8 @@ class App extends React.Component {
     const { produtos } = this.state;
     return (
       <ProdutosMain>
-        
+        <GlobalStyle />
         <Filtros />
-        
-
         <ContainerProdutos renderizarContainer={produtos} />
       </ProdutosMain>
     );

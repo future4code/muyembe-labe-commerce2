@@ -4,32 +4,33 @@ import styled from 'styled-components';
 //Estilização
 
 const MainStyle = styled.main`
-width:300px;
-height:100vh;
-display:flex;
-justify-content:center;
-align-items:center;
+    align-items: center;
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    width: 300px;
 
-@media(max-width:700px){
-display:none;
-}
+    @media (max-width:700px) {
+        display: none;
+    }
 `
 
 const Filtro = styled.section`
- background:white;
- width:300px;
- height:440px;
- display:flex;
- flex-direction:column;
- margin-left:40px;
-align-items:center;
-border-radius:5%;
-box-shadow: -3px 7px 11px 6px rgba(0,0,0,0.39);
-
-
+    align-items: center;
+    background: white;
+    border-radius: 5%;
+    box-shadow: -3px 7px 11px 6px rgba(0,0,0,0.39);
+    display: flex;
+    flex-direction: column;
+    gap: 1.6em;
+    height: 440px;
+    justify-content: center;
+    margin-left: 40px;
+    position: fixed;
+    width: 200px;
 `
 const InputStyle = styled.input`
-width:150px;
+    width: 150px;
 `
 
 
@@ -45,25 +46,25 @@ export function Filtros (){
             <h1>Filtros:</h1>
             <p>Valor mínimo:</p>
             <InputStyle
-            type="number"
-            id="quantidade" 
-            name="quantidade"
-            min="0"
+                type = "number"
+                id = "quantidade" 
+                name = "quantidade"
+                min = "0"
             />
 
             <p>Valor máximo:</p>
             <InputStyle
-            type="number"
-            id="quantidade"
-            name="quantidade"
-            min="0"
+                type = "number"
+                id = "quantidade"
+                name = "quantidade"
+                min = "0"
             />
 
             <p>Buscar produto:</p>
             <InputStyle
-            type="text"
-            id="texto"
-            name="texto"
+                type = "text"
+                id = "texto"
+                name = "texto"
             />
         </Filtro>
         </MainStyle>
