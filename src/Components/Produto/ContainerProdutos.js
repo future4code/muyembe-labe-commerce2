@@ -16,11 +16,11 @@ const Container = styled.section`
   justify-items: center;
   margin-top: 48px;
   
-  @media (max-width: 1024px) {
+  @media (max-width: 1280px) {
     grid-template-columns: repeat(2, 1fr);
     
   }
-  @media (max-width: 700px) {
+  @media (max-width: 800px) {
     grid-template-columns: 1fr;
   }
 `
@@ -32,7 +32,7 @@ const ContainerProdutos = (props) => {
         {props.renderizarContainer.map((produto) => {
           return (
             <Produto
-              id={produto.id}
+              key={produto.id}
               caminhoDaImagem={produto.caminhoDaImagem}
               nome={produto.nome}
               valor={produto.valor}

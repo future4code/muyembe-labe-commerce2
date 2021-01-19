@@ -2,12 +2,12 @@ import React from 'react'
 import styled from 'styled-components'
 
 const ComponenteDeProduto = styled.section`
+  background-color: #b0b4b8;
+  border-radius: 5px;
   display: flex;
   flex-direction: column;
   height: fit-content;
   width: 200px;
-  background-color: #b0b4b8;
-  border-radius: 5px;
 
   img {
     border-radius: 8px;
@@ -15,14 +15,20 @@ const ComponenteDeProduto = styled.section`
 
   button {
     background-color: #000000;
-    color: #ffffff;
-    height: 35px;
     border-radius: 5px;
+    color: #ffffff;
+    font-size: 12px;
+    height: 35px;
   }
 
   button:hover {
     background-color: #575957;
     transition: ease 0.3s;
+  }
+
+  @media (max-width: 600px) {
+    font-size: 12px;
+    width: 120px;
   }
 `
 const InfoProduto = styled.div`
