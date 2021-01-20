@@ -15,7 +15,7 @@ const MainStyle = styled.main`
     }
 `
 
-const Filtro = styled.section`
+const FiltroContainer = styled.section`
     align-items: center;
     background: white;
     border-radius: 5%;
@@ -29,12 +29,13 @@ const Filtro = styled.section`
     position: fixed;
     width: 200px;
 
+
     @media (max-width: 600px) {
         width: 120px;
         margin-left: 0;
     }
 `
-const InputStyle = styled.input`
+const InputStyle = styled.div`
     width: 150px;
 
     @media (max-width: 600px) {
@@ -44,38 +45,34 @@ const InputStyle = styled.input`
 
 
 
-export function Filtros (){ 
+class Filtro extends React.Component {
 
-    return (
 
-        <MainStyle>
+    render (){
 
-        <Filtro>
+        return (
+          <MainStyle>
 
-            <h1>Filtros:</h1>
-            <p>Valor mínimo:</p>
-            <InputStyle
-                type = "number"
-                id = "quantidade" 
-                name = "quantidade"
-                min = "0"
-            />
-
-            <p>Valor máximo:</p>
-            <InputStyle
-                type = "number"
-                id = "quantidade"
-                name = "quantidade"
-                min = "0"
-            />
-
-            <p>Buscar produto:</p>
-            <InputStyle
-                type = "text"
-                id = "texto"
-                name = "texto"
-            />
-        </Filtro>
-        </MainStyle>
-    );
+            <FiltroContainer>
+            <h1>Filtros</h1>
+                <InputStyle>
+                    <p>Valor Mínimo</p>
+                    <input type="number" onChange={this.props.minimo} min={0}></input>
+                </InputStyle>
+                <InputStyle>
+                    <p>Valor Máximo</p>
+                    <input type="number" onChange={this.props.maximo} ></input>
+                </InputStyle>
+                <InputStyle>
+                    <p>Buscar Produto</p>
+                    <input type="text" onChange={this.props.busca}></input>
+                </InputStyle>
+            </FiltroContainer>
+          </MainStyle>
+        );
+   
 }
+
+}
+
+export default Filtro;

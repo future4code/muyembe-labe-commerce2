@@ -26,6 +26,7 @@ const Container = styled.section`
 `
 
 const ContainerProdutos = (props) => {
+
   return (
     <EstiloContainerProdutos>
       <Container>
@@ -36,6 +37,9 @@ const ContainerProdutos = (props) => {
               caminhoDaImagem={produto.caminhoDaImagem}
               nome={produto.nome}
               valor={produto.valor}
+              //
+              produto={props.filtro}
+            
             />
           )
         })}
