@@ -32,10 +32,11 @@ const ContainerProdutos = (props) => {
         {props.renderizarContainer.map((produto) => {
           return (
             <Produto
-              key={produto.id}
-              caminhoDaImagem={produto.caminhoDaImagem}
-              nome={produto.nome}
-              valor={produto.valor}
+              key = {produto.id}
+              caminhoDaImagem = {produto.caminhoDaImagem}
+              nome = {produto.nome}
+              valor = {Number(produto.valor).toFixed(2)}
+              adicionarAoCarrinho = {() => props.adicionarAoCarrinho(produto)}
             />
           )
         })}
