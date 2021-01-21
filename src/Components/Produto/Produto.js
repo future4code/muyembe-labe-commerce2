@@ -37,10 +37,10 @@ const InfoProduto = styled.div`
   justify-content: center;
 
   p {
-    padding: 5px;
+    padding: 8px;
   }
 
-  .product-name {
+  .nome-produto {
     font-weight: bold;
   }
 `
@@ -50,12 +50,12 @@ const Produto = (props) => {
       <ComponenteDeProduto>
         <img src={props.caminhoDaImagem} alt="" />
         <InfoProduto>
-          <p className="product-name"> {props.nome} </p>
+          <p className="nome-produto"> {props.nome} </p>
           <p>
-            <b> R$ </b> {props.valor.toFixed(2)}
+            <b> R$ </b> {props.valor}
           </p>
           </InfoProduto>
-        <button>Adicionar ao carrinho</button>
+        <button onClick = {props.adicionarAoCarrinho}>Adicionar ao carrinho</button>
       </ComponenteDeProduto>
     )
 }
