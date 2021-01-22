@@ -1,21 +1,22 @@
 import React from "react";
-import styled, { createGlobalStyle } from "styled-components";
-import  Filtros from "./Components/Filtros/Filtros";
+import styled from "styled-components";
+import GlobalStyle from "./globalStyles";
+import { Filtros } from "./Components/Filtros/Filtros";
 import ContainerProdutos from "./Components/Produto/ContainerProdutos";
-
-const GlobalStyle = createGlobalStyle`
-  * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
-`;
+import Carrinho from "./Components/Carrinho/Carrinho"
+import iconeCarrinho from "./img/carrinho.png"
 
 const ProdutosMain = styled.main`
   display: flex;
-  width: 100vw;
   height: 100vh;
-`;
+  width: 100vw;
+  .iconeCarrinho {
+    bottom: 36px;
+    position: absolute;
+    right: 28px;
+    width: 4%;
+  }
+`
 
 class App extends React.Component {
   state = {
@@ -76,26 +77,96 @@ class App extends React.Component {
         caminhoDaImagem: "https://picsum.photos/201/201",
       },
     ],
-    filtroTexto: " ", //FILTRO
-    filtroMaximo: null,//FILTRO
-    filtroMinimo: null,//FILTRO
-  };
+
+    carrinho: [],
+    valorTotal: "",
+    carrinhoNaTela: false
+  }
+
+  mostrarCarrinho = () => {
+    this.setState({ carrinhoNaTela: !this.state.carrinhoNaTela })
+  }
+  
+  adicionarAoCarrinho = (produto) => {
+    let validarCarrinho = [...this.state.carrinho]
+    let listaCarrinho = validarCarrinho.verificarLista (
+      (objeto) => objeto.id === produto.id
+    )
+
+    if (listaCarrinho > -1) {
+      validarCarrinho[listaCarrinho].quantidade += 1
+    } else {
+      const novoObjeto = {
+        id: produto.id,
+        nome: produto.nome,
+        valor: produto.valor,
+        quantidade: 1,
+      }
+      validarCarrinho.push(novoObjeto);
+    }
+    this.setState({ carrinho: validarCarrinho })
+  }
+
+  somarProdutoNoCarrinho = (objeto) => {
+    let validarCarrinho= [...this.state.carrinho]
+    let listaCarrinho = validarCarrinho.verificarLista (
+      (objetoNoCarrinho) => objeto.id === objetoNoCarrinho.id
+    )
+    validarCarrinho[listaCarrinho].quantidade += 1
+    this.setState({ carrinho: validarCarrinho })
+  }
+
+  subtrairProdutoNoCarrinho = (objeto) => {
+    let validarCarrinho = [...this.state.carrinho]
+    let listaCarrinho = validarCarrinho.verificarLista (
+      (objetoNoCarrinho) => objeto.id === objetoNoCarrinho.id
+    )
+    if (validarCarrinho[listaCarrinho].quantidade > 1) {
+      validarCarrinho[listaCarrinho].quantidade -= 1
+    }
+    this.setState({ carrinho: validarCarrinho })
+  }
+
+  excluirProdutoDoCarrinho = (objeto) => {
+    let validarCarrinho = [...this.state.carrinho];
+    let listaCarrinho = validarCarrinho.verificarLista (
+      (objetoNoCarrinho) => objeto.id === objetoNoCarrinho.id
+    )
+    validarCarrinho.splice(listaCarrinho, 1)
+    this.setState({ carrinho: validarCarrinho })
+  }
+
+  limparTodoOCarrinho = () => { this.setState({ carrinho: [] }) }
 
   render() {
-    const { produtos } = this.state;
+    let valorTotal = 0
+
+    this.state.carrinho.map (
+      (objeto) => {
+        valorTotal += objeto.valor * objeto.quantidade
+      }
+    )
+
+    const { produtos } = this.state
     return (
       <ProdutosMain>
-        
-        <Filtros
-       
-        
-        />
-        
-
-        <ContainerProdutos renderizarContainer={produtos} />
+        <GlobalStyle />
+        <Filtros />
+        <ContainerProdutos renderizarContainer = {produtos} />
+        {this.state.carrinhoNaTela && (
+            <Carrinho
+              carrinho={this.state.carrinho}
+              somarProdutoNoCarrinho={this.somarProdutoNoCarrinho}
+              subtrairProdutoNoCarrinho={this.subtrairProdutoNoCarrinho}
+              excluirProdutoDoCarrinho={this.excluirProdutoDoCarrinho}
+              limparTodoOCarrinho={this.limparTodoOCarrinho}
+              valorTotal={valorTotal}
+            />
+          )}
+        <img className="iconeCarrinho" src={iconeCarrinho} onClick={this.mostrarCarrinho} />
       </ProdutosMain>
-    );
+    )
   }
 }
 
-export default App;
+export default App

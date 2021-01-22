@@ -33,13 +33,7 @@ const ContainerProdutos = (props) => {
         {props.renderizarContainer.map((produto) => {
           return (
             <Produto
-              key={produto.id}
-              caminhoDaImagem={produto.caminhoDaImagem}
-              nome={produto.nome}
-              valor={produto.valor}
-              //
-              produto={props.filtro}
-            
+
             />
           )
         })}
