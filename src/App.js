@@ -90,12 +90,12 @@ class App extends React.Component {
   
   adicionarAoCarrinho = (produto) => {
     let validarCarrinho = [...this.state.carrinho]
-    let listaCarrinho = validarCarrinho.verificarLista (
+    let listaCarrinho = validarCarrinho.filter (
       (objeto) => objeto.id === produto.id
     )
 
-    if (listaCarrinho > -1) {
-      validarCarrinho[listaCarrinho].quantidade += 1
+    if (listaCarrinho.length > 0) {
+      listaCarrinho[0].quantidade += 1
     } else {
       const novoObjeto = {
         id: produto.id,
@@ -110,27 +110,27 @@ class App extends React.Component {
 
   somarProdutoNoCarrinho = (objeto) => {
     let validarCarrinho= [...this.state.carrinho]
-    let listaCarrinho = validarCarrinho.verificarLista (
+    let listaCarrinho = validarCarrinho.filter (
       (objetoNoCarrinho) => objeto.id === objetoNoCarrinho.id
     )
-    validarCarrinho[listaCarrinho].quantidade += 1
+    listaCarrinho[0].quantidade += 1
     this.setState({ carrinho: validarCarrinho })
   }
 
   subtrairProdutoNoCarrinho = (objeto) => {
     let validarCarrinho = [...this.state.carrinho]
-    let listaCarrinho = validarCarrinho.verificarLista (
+    let listaCarrinho = validarCarrinho.filter (
       (objetoNoCarrinho) => objeto.id === objetoNoCarrinho.id
     )
-    if (validarCarrinho[listaCarrinho].quantidade > 1) {
-      validarCarrinho[listaCarrinho].quantidade -= 1
+    if (listaCarrinho[0].quantidade > 1) {
+      listaCarrinho[0].quantidade -= 1
     }
     this.setState({ carrinho: validarCarrinho })
   }
 
   excluirProdutoDoCarrinho = (objeto) => {
     let validarCarrinho = [...this.state.carrinho];
-    let listaCarrinho = validarCarrinho.verificarLista (
+    let listaCarrinho = validarCarrinho.filter (
       (objetoNoCarrinho) => objeto.id === objetoNoCarrinho.id
     )
     validarCarrinho.splice(listaCarrinho, 1)
@@ -153,7 +153,7 @@ class App extends React.Component {
       <ProdutosMain>
         <GlobalStyle />
         <Filtros />
-        <ContainerProdutos renderizarContainer = {produtos} />
+        <ContainerProdutos renderizarContainer = {produtos} adicionarAoCarrinho = {this.adicionarAoCarrinho} />
         {this.state.carrinhoNaTela && (
             <Carrinho
               carrinho={this.state.carrinho}
