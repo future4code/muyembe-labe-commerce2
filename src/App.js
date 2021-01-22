@@ -76,6 +76,9 @@ class App extends React.Component {
         caminhoDaImagem: "https://picsum.photos/201/201",
       },
     ],
+    filtroTexto: " ", //FILTRO
+    filtroMaximo: null,//FILTRO
+    filtroMinimo: null,//FILTRO
   };
 
   render() {
@@ -84,9 +87,7 @@ class App extends React.Component {
       <ProdutosMain>
         
         <Filtros
-        // minimo={}
-        // maximo={}
-        // busca={}
+       
         
         />
         

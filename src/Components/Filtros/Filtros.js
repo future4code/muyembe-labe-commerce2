@@ -1,78 +1,30 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
 
-//Estilização
+class Filtros extends React.Component {
+  filtroTexto = (event) => {
+    this.props.filtroTexto(event.target.value);
+  };
 
-const MainStyle = styled.main`
-    align-items: center;
-    display: flex;
-    height: 100vh;
-    justify-content: center;
-    width: 300px;
-    
-    @media (max-width: 600px) {
-        width: 160px;
-    }
-`
+  filtroMaximo = (event) => {
+    this.props.filtroMaximo(event.target.value);
+  };
 
-const FiltroContainer = styled.section`
-    align-items: center;
-    background: white;
-    border-radius: 5%;
-    box-shadow: -3px 7px 11px 6px rgba(0,0,0,0.39);
-    display: flex;
-    flex-direction: column;
-    gap: 1.6em;
-    height: 440px;
-    justify-content: center;
-    margin-left: 40px;
-    position: fixed;
-    width: 200px;
+  filtroMinimo = (event) => {
+    this.props.filtroMinimo(event.target.value);
+  };
 
-
-    @media (max-width: 600px) {
-        width: 120px;
-        margin-left: 0;
-    }
-`
-const InputStyle = styled.div`
-    width: 150px;
-
-    @media (max-width: 600px) {
-        width: 96px;
-    }
-`
-
-
-
-class Filtro extends React.Component {
-
-
-    render (){
-
-        return (
-          <MainStyle>
-
-            <FiltroContainer>
-            <h1>Filtros</h1>
-                <InputStyle>
-                    <p>Valor Mínimo</p>
-                    <input type="number" onChange={this.props.minimo} min={0}></input>
-                </InputStyle>
-                <InputStyle>
-                    <p>Valor Máximo</p>
-                    <input type="number" onChange={this.props.maximo} ></input>
-                </InputStyle>
-                <InputStyle>
-                    <p>Buscar Produto</p>
-                    <input type="text" onChange={this.props.busca}></input>
-                </InputStyle>
-            </FiltroContainer>
-          </MainStyle>
-        );
-   
+  render() {
+    return (
+      <form>
+        <h1>Filter</h1>
+        <p>Valor Mínimo:</p>
+        <input type="number" onChange={this.filtroMinimo} />
+        <p>Valor Máximo:</p>
+        <input type="number" onChange={this.filtroMaximo} />
+        <p>Buscar Produto:</p>
+        <input type="text" onChange={this.filtroTexto} />
+      </form>
+    );
+  }
 }
-
-}
-
-export default Filtro;
+export default Filtros;
