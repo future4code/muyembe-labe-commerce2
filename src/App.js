@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import GlobalStyle from "./globalStyles";
-import { Filtros } from "./Components/Filtros/Filtros";
+import  Filtros  from "./Components/Filtros/Filtros";
 import ContainerProdutos from "./Components/Produto/ContainerProdutos";
 import Carrinho from "./Components/Carrinho/Carrinho"
 import iconeCarrinho from "./img/carrinho.png"
