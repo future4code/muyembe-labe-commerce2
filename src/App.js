@@ -13,6 +13,7 @@ const ProdutosMain = styled.main`
 
   .iconeCarrinho {
     bottom: 36px;
+    cursor: pointer;
     position: absolute;
     right: 28px;
     width: 4%;

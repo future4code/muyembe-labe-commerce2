@@ -30,23 +30,30 @@ const BotaoMudarQuantidade = styled.button`
   background-color: #000;
   border: 1px solid black;
   color: #fff;
+  cursor: pointer;
   margin: 0 8px 0 12px;
   outline: none;
   width: 16px;
 `
 
 const BotaoExcluirProduto = styled.button`
+    cursor: pointer;
     padding: 3px;
     background-color: #ffffff;
+    color: #bec0c2;
     border: none;
     outline: none;
     font-weight: bold;
+    :hover {
+      color: #55595c;
+    }
 `
 
 const BotaoLimparCarrinho = styled.button`
   background-color: #000000;
   border-radius: 8px;
   color: #ffffff;
+  cursor: pointer;
   height: 36px;
   :hover {
     background-color: #575957;
@@ -60,9 +67,9 @@ const Carrinho = (props) => {
     return (
       <ProdutoNoCarrinho key={objeto.id}>
         <p>
-          <BotaoMudarQuantidade onClick = { () => props.somarProdutoNoCarrinho(objeto) }> + </BotaoMudarQuantidade>
-          {objeto.quantidade}
           <BotaoMudarQuantidade onClick = { () => props.subtrairProdutoNoCarrinho(objeto) }> - </BotaoMudarQuantidade>
+          {objeto.quantidade}
+          <BotaoMudarQuantidade onClick = { () => props.somarProdutoNoCarrinho(objeto) }> + </BotaoMudarQuantidade>
           {" "}
           {objeto.nome}
         </p>
