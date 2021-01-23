@@ -17,6 +17,7 @@ const ComponenteDeProduto = styled.section`
     background-color: #000000;
     border-radius: 5px;
     color: #ffffff;
+    cursor: pointer;
     font-size: 12px;
     height: 35px;
   }
