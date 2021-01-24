@@ -20,6 +20,20 @@ const ProdutosMain = styled.main`
   }
 `
 
+const NotificacaoCarrinho = styled.div`
+  background-color: black;
+  border-radius: 16px;
+  bottom: 80px;
+  color: whitesmoke;
+  padding: 4px;
+  position: absolute;
+  right: 94px;
+
+  p {
+    text-align: center;
+  }
+`
+
 class App extends React.Component {
   state = {
     produtos: [
@@ -82,7 +96,8 @@ class App extends React.Component {
 
     carrinho: [],
     valorTotal: "",
-    carrinhoNaTela: false
+    carrinhoNaTela: false,
+    notificacaoCarrinho: false
   }
 
   mostrarCarrinho = () => {
@@ -104,9 +119,11 @@ class App extends React.Component {
         valor: produto.valor,
         quantidade: 1,
       }
-      validarCarrinho.push(novoObjeto);
+      validarCarrinho.push (novoObjeto);
     }
     this.setState({ carrinho: validarCarrinho })
+    this.definirNotificacaoCarrinho(true)
+		setTimeout (() =>  this.definirNotificacaoCarrinho (false), 4000)
   }
 
   somarProdutoNoCarrinho = (objeto) => {
@@ -115,7 +132,7 @@ class App extends React.Component {
       (objetoNoCarrinho) => objeto.id === objetoNoCarrinho.id
     )
     listaCarrinho[0].quantidade += 1
-    this.setState({ carrinho: validarCarrinho })
+    this.setState ({ carrinho: validarCarrinho })
   }
 
   subtrairProdutoNoCarrinho = (objeto) => {
@@ -139,6 +156,10 @@ class App extends React.Component {
   }
 
   limparTodoOCarrinho = () => { this.setState({ carrinho: [] }) }
+
+  definirNotificacaoCarrinho = (notificacaoCarrinho) => {
+		this.setState ({ mostrarNotificacaoCarrinho: notificacaoCarrinho })
+	}
 
   render() {
     let valorTotal = 0
@@ -165,6 +186,16 @@ class App extends React.Component {
               valorTotal={valorTotal}
             />
           )}
+        <NotificacaoCarrinho>
+          {
+            this.state.mostrarNotificacaoCarrinho &&
+            <p>
+              Produto adicionado ao carrinho! <br />
+              Clique aqui para mostrar<br />
+              ou ocultar as suas compras.
+            </p>
+          }
+        </NotificacaoCarrinho>
         <img className="iconeCarrinho" src={iconeCarrinho} onClick={this.mostrarCarrinho} />
       </ProdutosMain>
     )
