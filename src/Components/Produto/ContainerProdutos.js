@@ -25,21 +25,26 @@ const Container = styled.section`
   }
 `
 
+
+
 const ContainerProdutos = (props) => {
   return (
     <EstiloContainerProdutos>
       <Container>
         {props.renderizarContainer.map((produto) => {
           return (
+            
             <Produto
               key = {produto.id}
               caminhoDaImagem = {produto.caminhoDaImagem}
               nome = {produto.nome}
               valor = {Number(produto.valor).toFixed(2)}
               adicionarAoCarrinho = {() => props.adicionarAoCarrinho(produto)}
+              
             />
           )
         })}
+        
       </Container>
     </EstiloContainerProdutos>
   )

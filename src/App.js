@@ -20,22 +20,76 @@ const ProdutosMain = styled.main`
   }
 `
 
-const NotificacaoCarrinho = styled.div`
-  background-color: black;
-  border-radius: 16px;
-  bottom: 80px;
-  color: whitesmoke;
-  padding: 4px;
-  position: absolute;
-  right: 94px;
 
-  p {
-    text-align: center;
-  }
-`
+// FILTRO
+const produto = [
+  {
+    id: 1,
+    nome: "item A",
+    valor: 10.0,
+    caminhoDaImagem: "https://picsum.photos/200/200",
+  },
+
+  {
+    id: 2,
+    nome: "item B",
+    valor: 20.0,
+    caminhoDaImagem: "https://picsum.photos/200/201",
+  },
+
+  {
+    id: 3,
+    nome: "item C",
+    valor: 30.0,
+    caminhoDaImagem: "https://picsum.photos/201/202",
+  },
+
+  {
+    id: 4,
+    nome: "item D",
+    valor: 40.0,
+    caminhoDaImagem: "https://picsum.photos/201/203",
+  },
+
+  {
+    id: 5,
+    nome: "item E",
+    valor: 50.0,
+    caminhoDaImagem: "https://picsum.photos/201/200",
+  },
+
+  {
+    id: 6,
+    nome: "item F",
+    valor: 60.0,
+    caminhoDaImagem: "https://picsum.photos/202/200",
+  },
+
+  {
+    id: 7,
+    nome: "item G",
+    valor: 70.0,
+    caminhoDaImagem: "https://picsum.photos/203/200",
+  },
+
+  {
+    id: 8,
+    nome: "item H",
+    valor: 80.0,
+    caminhoDaImagem: "https://picsum.photos/201/201",
+  },
+]
+
+// FILTRO
+
+
+
+
+
 
 class App extends React.Component {
   state = {
+
     produtos: [
       {
         id: 1,
@@ -97,8 +151,33 @@ class App extends React.Component {
     carrinho: [],
     valorTotal: "",
     carrinhoNaTela: false,
-    notificacaoCarrinho: false
+
+
+    minimo: null, //FILTRO
+    maximo: null,//FILTRO
+    texto: '',//FILTRO
+
   }
+
+  // FILTRO
+
+  onChangeMinimo = (event) => {
+    this.setState({minimo: event.target.value})
+
+  }
+
+  onChangeMaximo = (event) => {
+    this.setState({maximo: event.target.value})
+  }
+
+  onChangeTexto = (event) => {
+    this.setState({texto: event.target.value})
+  }
+
+
+  // FILTRO
+
+ 
 
   mostrarCarrinho = () => {
     this.setState({ carrinhoNaTela: !this.state.carrinhoNaTela })
@@ -157,25 +236,52 @@ class App extends React.Component {
 
   limparTodoOCarrinho = () => { this.setState({ carrinho: [] }) }
 
-  definirNotificacaoCarrinho = (notificacaoCarrinho) => {
-		this.setState ({ mostrarNotificacaoCarrinho: notificacaoCarrinho })
-	}
+
+  // FILTROS
+
+   filtrados = () => {
+    return this.state.produtos
+      .filter((produto) => this.state.maximo ? produto.valor < this.state.maximo : true)
+      .filter((produto) => this.state.minimo ? produto.valor > this.state.minimo : true)
+      .filter((produto) => this.state.texto ? produto.nome.includes(this.state.texto) : true)
+  }
+  
+  
+  //FILTROS
+ 
+
 
   render() {
     let valorTotal = 0
-
+ 
     this.state.carrinho.map (
       (objeto) => {
         valorTotal += objeto.valor * objeto.quantidade
       }
     )
-
     const { produtos } = this.state
     return (
       <ProdutosMain>
         <GlobalStyle />
-        <Filtros />
-        <ContainerProdutos renderizarContainer = {produtos} adicionarAoCarrinho = {this.adicionarAoCarrinho} />
+        {/* //FILTRO */}
+        <Filtros
+        minimo={this.state.minimo}
+        maximo={this.state.maximo}
+        texto={this.state.texto}
+        onChangeMinimo={this.onChangeMinimo}            
+        onChangeMaximo={this.onChangeMaximo}            
+        onChangeTexto={this.onChangeTexto}   
+         />
+
+
+        <ContainerProdutos renderizarContainer = {produtos}
+          minimo={this.state.minimo}
+          maximo={this.state.maximo}
+          texto={this.state.texto}
+        
+       
+        adicionarAoCarrinho = {this.adicionarAoCarrinho} 
+        />
         {this.state.carrinhoNaTela && (
             <Carrinho
               carrinho={this.state.carrinho}
@@ -186,17 +292,8 @@ class App extends React.Component {
               valorTotal={valorTotal}
             />
           )}
-        <NotificacaoCarrinho>
-          {
-            this.state.mostrarNotificacaoCarrinho &&
-            <p>
-              Produto adicionado ao carrinho! <br />
-              Clique aqui para mostrar<br />
-              ou ocultar as suas compras.
-            </p>
-          }
-        </NotificacaoCarrinho>
-        <img className="iconeCarrinho" src={iconeCarrinho} onClick={this.mostrarCarrinho} />
+        <img className="iconeCarrinho" src={iconeCarrinho} onClick={this.mostrarCarrinho} alt={'produtos'} />
+
       </ProdutosMain>
     )
   }

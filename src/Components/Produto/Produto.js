@@ -44,11 +44,19 @@ const InfoProduto = styled.div`
   .nome-produto {
     font-weight: bold;
   }
-`
+  
+  `
+
+
+
 
 const Produto = (props) => {
+
+
+
     return (
       <ComponenteDeProduto>
+        
         <img src={props.caminhoDaImagem} alt="" />
         <InfoProduto>
           <p className="nome-produto"> {props.nome} </p>
@@ -60,6 +68,8 @@ const Produto = (props) => {
       </ComponenteDeProduto>
     )
 }
+
+
 
 
 export default Produto
