@@ -13,11 +13,13 @@ const ProdutosMain = styled.main`
 
   .iconeCarrinho {
     bottom: 36px;
+    cursor: pointer;
     position: absolute;
     right: 28px;
     width: 4%;
   }
 `
+
 
 // FILTRO
 const produto = [
@@ -79,6 +81,7 @@ const produto = [
 ]
 
 // FILTRO
+
 
 
 
@@ -149,6 +152,7 @@ class App extends React.Component {
     valorTotal: "",
     carrinhoNaTela: false,
 
+
     minimo: null, //FILTRO
     maximo: null,//FILTRO
     texto: '',//FILTRO
@@ -159,6 +163,7 @@ class App extends React.Component {
 
   onChangeMinimo = (event) => {
     this.setState({minimo: event.target.value})
+
   }
 
   onChangeMaximo = (event) => {
@@ -193,9 +198,11 @@ class App extends React.Component {
         valor: produto.valor,
         quantidade: 1,
       }
-      validarCarrinho.push(novoObjeto);
+      validarCarrinho.push (novoObjeto);
     }
     this.setState({ carrinho: validarCarrinho })
+    this.definirNotificacaoCarrinho(true)
+		setTimeout (() =>  this.definirNotificacaoCarrinho (false), 4000)
   }
 
   somarProdutoNoCarrinho = (objeto) => {
@@ -204,7 +211,7 @@ class App extends React.Component {
       (objetoNoCarrinho) => objeto.id === objetoNoCarrinho.id
     )
     listaCarrinho[0].quantidade += 1
-    this.setState({ carrinho: validarCarrinho })
+    this.setState ({ carrinho: validarCarrinho })
   }
 
   subtrairProdutoNoCarrinho = (objeto) => {
@@ -285,6 +292,7 @@ class App extends React.Component {
             />
           )}
         <img className="iconeCarrinho" src={iconeCarrinho} onClick={this.mostrarCarrinho} alt={'produtos'} />
+
       </ProdutosMain>
     )
   }
